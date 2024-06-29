@@ -37,6 +37,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -48,6 +51,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.kotlin.stdlib.jdk8)
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
     implementation(libs.kotlinx.serialization.json)
     androidTestImplementation(libs.androidx.junit)

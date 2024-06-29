@@ -3,5 +3,8 @@
     <string name="title_home">call</string>
     <string name="title_dashboard">photo</string>
     <string name="title_notifications">etc</string>
+    <string name="add_image">AddImage</string>
+    <string name="image_insert">ImageInsert</string>
+    <string name="popup_image">ImagePopup</string>
     <string name="fab_content_description">Add new item</string>
 </resources>
