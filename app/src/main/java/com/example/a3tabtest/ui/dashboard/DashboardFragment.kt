@@ -45,7 +45,6 @@ class DashboardFragment : Fragment() {
         itemList.add(RecyclerModel(R.drawable.item_lv_10, "리엔느와2르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
         itemList.add(RecyclerModel(R.drawable.pika, "리엔느와2르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
         itemList.add(RecyclerModel(R.drawable.item_lv_06, "리엔2느와르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
-        itemList.add(RecyclerModel(R.drawable.pika, "리엔느와2르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
         val adapter = RecyclerAdapter(itemList)
         // Adapter 설정
         binding.recyclerview.adapter = adapter
