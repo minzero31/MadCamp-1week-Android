@@ -1,0 +1,8 @@
+<!-- purple_dot.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#9C27B0"/> <!-- 보라색 색상 -->
+    <size
+        android:width="10dp"
+        android:height="10dp"/> <!-- 원형의 크기 -->
+</shape>

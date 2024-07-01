@@ -21,6 +21,7 @@ class CalendarAdapter(
     private val dateFormat = SimpleDateFormat("d", Locale.KOREAN)
     private val monthFormat = SimpleDateFormat("M", Locale.KOREAN)
     private val currentMonth = monthFormat.format(currentDate)
+    private var selectedDate: Date? = null
 
     override fun getCount(): Int = dates.size
 
@@ -34,6 +35,7 @@ class CalendarAdapter(
 
         val date = dates[position]
         val dayText = view.findViewById<TextView>(R.id.dayText)
+        val dotView = view.findViewById<View>(R.id.dotView)
 
         if (date != null) {
             dayText.text = dateFormat.format(date)
@@ -41,18 +43,27 @@ class CalendarAdapter(
             val dateMonth = monthFormat.format(date)
             if (dateMonth != currentMonth) {
                 dayText.setTextColor(ContextCompat.getColor(context, R.color.greyed_out))
+                dotView.visibility = View.INVISIBLE // 비활성화된 날짜는 점을 숨김
             } else {
                 dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                if (date == selectedDate) {
+                    dotView.visibility = View.VISIBLE // 선택된 날짜에만 점을 보이도록 설정
+                } else {
+                    dotView.visibility = View.INVISIBLE // 선택되지 않은 날짜는 점을 숨김
+                }
             }
 
             view.visibility = View.VISIBLE // 현재 달의 날짜인 경우 보이도록 설정
 
             // 클릭 리스너 추가
-            dayText.setOnClickListener {
+            view.setOnClickListener {
+                selectedDate = date
+                notifyDataSetChanged() // 데이터 변경을 알림
                 showDateDialog(date)
             }
         } else {
             dayText.text = ""
+            dotView.visibility = View.INVISIBLE // 비어 있는 셀은 점을 숨김
             view.visibility = View.INVISIBLE // 비어 있는 셀은 숨김
         }
 
