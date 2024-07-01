@@ -1,5 +1,6 @@
 package com.example.a3tabtest.ui.notifications
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -45,11 +46,33 @@ class CalendarAdapter(
             }
 
             view.visibility = View.VISIBLE // 현재 달의 날짜인 경우 보이도록 설정
+
+            // 클릭 리스너 추가
+            dayText.setOnClickListener {
+                showDateDialog(date)
+            }
         } else {
             dayText.text = ""
             view.visibility = View.INVISIBLE // 비어 있는 셀은 숨김
         }
 
         return view
+    }
+
+    private fun showDateDialog(date: Date) {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dialog_date_info)
+
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+
+        val dateFormat = SimpleDateFormat("yyyy년 M월 d일 (E)", Locale.KOREAN)
+        val dateString = dateFormat.format(date)
+        dialog.findViewById<TextView>(R.id.dateInfoText).text = dateString
+
+        dialog.findViewById<TextView>(R.id.medicationText).text = "<복용한 약>"
+        dialog.findViewById<TextView>(R.id.bottomText).text = "우하하"
+
+        dialog.show()
     }
 }
