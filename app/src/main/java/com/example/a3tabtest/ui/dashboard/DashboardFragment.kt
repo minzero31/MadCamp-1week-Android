@@ -42,8 +42,7 @@ class DashboardFragment : Fragment() {
         itemList.add(RecyclerModel(R.drawable.item_lv_06, "리엔느와르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
         itemList.add(RecyclerModel(R.drawable.item_lv_08, "마뗑2", "ACCORDION WALLET IN WHITE", "88,000원"))
         itemList.add(RecyclerModel(R.drawable.item_lv_09, "마리떼 프2랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye", "29,000원"))
-        itemList.add(RecyclerModel(R.drawable.item_lv_10, "리엔느와2르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
-        itemList.add(RecyclerModel(R.drawable.pika, "리엔느와2르","Dot Toggle Pearl Necklace (2color)", "57,000원"))
+
 
         val adapter = RecyclerAdapter(itemList)
         // Adapter 설정
