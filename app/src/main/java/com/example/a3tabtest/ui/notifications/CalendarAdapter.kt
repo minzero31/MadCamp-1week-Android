@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.a3tabtest.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarAdapter(
     private val context: Context,
-    private val dates: List<Date>,
+    private val dates: List<Date?>, // Date 배열에 null을 허용하여 비어 있는 셀을 나타냄
     private val currentDate: Date
 ) : BaseAdapter() {
 
@@ -22,7 +23,7 @@ class CalendarAdapter(
 
     override fun getCount(): Int = dates.size
 
-    override fun getItem(position: Int): Any = dates[position]
+    override fun getItem(position: Int): Any? = dates[position]
 
     override fun getItemId(position: Int): Long = position.toLong()
 
@@ -32,13 +33,21 @@ class CalendarAdapter(
 
         val date = dates[position]
         val dayText = view.findViewById<TextView>(R.id.dayText)
-        dayText.text = dateFormat.format(date)
 
-        val dateMonth = monthFormat.format(date)
-        if (dateMonth != currentMonth) {
-            dayText.setTextColor(context.resources.getColor(R.color.gray, null))
+        if (date != null) {
+            dayText.text = dateFormat.format(date)
+
+            val dateMonth = monthFormat.format(date)
+            if (dateMonth != currentMonth) {
+                dayText.setTextColor(ContextCompat.getColor(context, R.color.greyed_out))
+            } else {
+                dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+            }
+
+            view.visibility = View.VISIBLE // 현재 달의 날짜인 경우 보이도록 설정
         } else {
-            dayText.setTextColor(context.resources.getColor(R.color.black, null))
+            dayText.text = ""
+            view.visibility = View.INVISIBLE // 비어 있는 셀은 숨김
         }
 
         return view
