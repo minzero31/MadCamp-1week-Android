@@ -1,11 +1,13 @@
 package com.example.a3tabtest.ui.dashboard
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.a3tabtest.R
 
 class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
@@ -49,12 +51,25 @@ class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
             val imageArea = itemView.findViewById<ImageView>(R.id.imageArea)
             val titleArea = itemView.findViewById<TextView>(R.id.titleArea)
             val contentArea = itemView.findViewById<TextView>(R.id.contentArea)
-            val priceArea = itemView.findViewById<TextView>(R.id.priceArea)
 
-            imageArea.setImageResource(items.image)
+
+            when {
+                items.imageUri != null -> {
+                    Glide.with(itemView.context)
+                        .load(items.imageUri)
+                        .into(imageArea)
+                }
+
+                items.image != null -> {
+                    imageArea.setImageResource(items.image)
+                }
+
+                else -> {
+                    imageArea.setImageResource(R.drawable.pika) // 기본 이미지 설정
+                }
+            }
             titleArea.text = items.title
             contentArea.text = items.content
-            priceArea.text = items.price
         }
 
     }
