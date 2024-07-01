@@ -51,11 +51,11 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.kotlin.stdlib.jdk8)
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.recyclerview:recyclerview:1.2.1") // 이미 추가된 부분
     implementation(libs.androidx.databinding.runtime)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     implementation(libs.kotlinx.serialization.json)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 }
