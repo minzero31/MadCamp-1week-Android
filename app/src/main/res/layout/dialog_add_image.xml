@@ -8,7 +8,7 @@
     <ImageButton
         android:id="@+id/imageinsert"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:src="@android:drawable/ic_menu_gallery" />
 
     <EditText
@@ -16,12 +16,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="약의 이름을 입력하세요" />
-
-    <EditText
-        android:id="@+id/takenday"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="복용 일수" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/startdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Date"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/startpicker"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Select Date"
+            android:layout_marginStart="10dp"/>
+        <TextView
+            android:id="@+id/enddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Date"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="30dp"/>
+
+        <Button
+            android:id="@+id/endpicker"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="Select Date"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

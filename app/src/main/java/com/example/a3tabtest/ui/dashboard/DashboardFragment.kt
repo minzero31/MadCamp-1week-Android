@@ -1,5 +1,6 @@
 package com.example.a3tabtest.ui.dashboard
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.a3tabtest.R
 import com.example.a3tabtest.databinding.ActivityRecyclerViewBinding
 import com.example.a3tabtest.AddImageDialog
@@ -29,25 +31,12 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         binding.buttonUpload.setOnClickListener {
             showAddImageDialog()
         }
+        loadSavedData()
         return binding.root
     }
 
     private fun initRecycler() {
         itemList = mutableListOf(
-            RecyclerModel(R.drawable.item_lv_01, null,"마리떼 프랑소와 저버", "CLASSIC LOGO CAP beige"),
-            RecyclerModel(R.drawable.item_lv_02, null,"마리떼 프랑소와 저버", "CLASSIC LOGO WOOL ECO BAG blue"),
-            RecyclerModel(R.drawable.item_lv_03, null,"마리떼 프랑소와 저버", "COLOR BLOCK SATIN SCRUNCHIE navy"),
-            RecyclerModel(R.drawable.item_lv_04, null,"마리떼 프랑소와 저버", "CLASSIC LOGO BACKPACK light blue"),
-            RecyclerModel(R.drawable.item_lv_05, null,"마리떼 프랑소와 저버", "CLASSIC LOGO COLOR BEANIE navy"),
-            RecyclerModel(R.drawable.background, null,"원브릴리언트", "Ivan-OB166-Black"),
-            RecyclerModel(R.drawable.item_lv_07, null,"시엔느", "Washing Lettering Ball Cap (Navy)"),
-            RecyclerModel(R.drawable.item_lv_08, null,"마뗑킴", "ACCORDION WALLET IN WHITE"),
-            RecyclerModel(R.drawable.item_lv_09, null,"마리떼 프랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye"),
-            RecyclerModel(R.drawable.item_lv_10, null,"리엔느와르", "Dot Toggle Pearl Necklace (2color)"),
-            RecyclerModel(R.drawable.pika, null,"리엔느와르", "Dot Toggle Pearl Necklace (2color)"),
-            RecyclerModel(R.drawable.item_lv_06, null,"리엔느와르", "Dot Toggle Pearl Necklace (2color)"),
-            RecyclerModel(R.drawable.item_lv_08, null,"마뗑2", "ACCORDION WALLET IN WHITE"),
-            RecyclerModel(R.drawable.item_lv_09, null,"마리떼 프2랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye")
         )
 
         adapter = RecyclerAdapter(itemList)
@@ -57,18 +46,20 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         adapter.setItemClickListener(object : RecyclerAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                showImagePopup(itemList[position].image)
+                showImagePopup(itemList[position].imageUri)
             }
         })
     }
 
-    private fun showImagePopup(image: Int?) {
-        if (image == null){
+    private fun showImagePopup(imageUri: Uri?) {
+        if (imageUri == null){
             return
         }
         val popupView = layoutInflater.inflate(R.layout.popup_image, null)
         val popupImageView = popupView.findViewById<ImageView>(R.id.popupImageView)
-        popupImageView.setImageResource(image)
+        Glide.with(this)
+            .load(imageUri)
+            .into(popupImageView)
 
         val popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         popupWindow.isOutsideTouchable = true
@@ -90,5 +81,36 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         // 예시로 새로운 항목을 추가하는 방법을 보여줍니다.
         itemList.add(RecyclerModel(null, uri, medicinename, takenday))
         adapter.notifyItemInserted(itemList.size - 1)
+
+        // SharedPreferences 객체 가져오기
+        val sharedPref =requireContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+
+        // 고유한 키를 생성하기 위해 itemList 크기를 사용합니다.
+        val itemIndex = itemList.size - 1
+
+        // 데이터를 SharedPreferences에 저장
+        editor.putString("uri_$itemIndex", uri.toString())
+        editor.putString("medicinename_$itemIndex", medicinename)
+        editor.putString("takenday_$itemIndex", takenday)
+        editor.apply()
+    }
+
+    fun loadSavedData() {
+        val sharedPref = requireContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+
+        itemList.clear()
+
+        for (i in 0 until sharedPref.all.size / 3) { // 각 항목당 3개의 데이터 (uri, medicinename, takenday)
+            val uri = sharedPref.getString("uri_$i", null)?.let { Uri.parse(it) }
+            val medicinename = sharedPref.getString("medicinename_$i", "")
+            val takenday = sharedPref.getString("takenday_$i", "")
+
+            if (uri != null && medicinename != null && takenday != null) {
+                itemList.add(RecyclerModel(null, uri, medicinename, takenday))
+            }
+        }
+
+        adapter.notifyDataSetChanged()
     }
 }
