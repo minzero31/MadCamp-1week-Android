@@ -49,12 +49,11 @@ class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
             val imageArea = itemView.findViewById<ImageView>(R.id.imageArea)
             val titleArea = itemView.findViewById<TextView>(R.id.titleArea)
             val contentArea = itemView.findViewById<TextView>(R.id.contentArea)
-            val priceArea = itemView.findViewById<TextView>(R.id.priceArea)
+
 
             imageArea.setImageResource(items.image)
             titleArea.text = items.title
             contentArea.text = items.content
-            priceArea.text = items.price
         }
 
     }
