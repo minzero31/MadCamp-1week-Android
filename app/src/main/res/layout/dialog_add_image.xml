@@ -12,13 +12,13 @@
         android:src="@android:drawable/ic_menu_gallery" />
 
     <EditText
-        android:id="@+id/nameEditText2"
+        android:id="@+id/medicinename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="약의 이름을 입력하세요" />
 
     <EditText
-        android:id="@+id/phoneNumberEditText"
+        android:id="@+id/takenday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="복용 일수" />

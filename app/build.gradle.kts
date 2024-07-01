@@ -54,6 +54,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
+    implementation("com.github.bumptech.glide:glide:4.11.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
     implementation(libs.kotlinx.serialization.json)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

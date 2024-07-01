@@ -34,20 +34,20 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
 
     private fun initRecycler() {
         itemList = mutableListOf(
-            RecyclerModel(R.drawable.item_lv_01, "마리떼 프랑소와 저버", "CLASSIC LOGO CAP beige", "49,000원"),
-            RecyclerModel(R.drawable.item_lv_02, "마리떼 프랑소와 저버", "CLASSIC LOGO WOOL ECO BAG blue", "49,000원"),
-            RecyclerModel(R.drawable.item_lv_03, "마리떼 프랑소와 저버", "COLOR BLOCK SATIN SCRUNCHIE navy", "39,000원"),
-            RecyclerModel(R.drawable.item_lv_04, "마리떼 프랑소와 저버", "CLASSIC LOGO BACKPACK light blue", "159,000원"),
-            RecyclerModel(R.drawable.item_lv_05, "마리떼 프랑소와 저버", "CLASSIC LOGO COLOR BEANIE navy", "49,000원"),
-            RecyclerModel(R.drawable.background, "원브릴리언트", "Ivan-OB166-Black", "112,000원"),
-            RecyclerModel(R.drawable.item_lv_07, "시엔느", "Washing Lettering Ball Cap (Navy)", "49,000원"),
-            RecyclerModel(R.drawable.item_lv_08, "마뗑킴", "ACCORDION WALLET IN WHITE", "88,000원"),
-            RecyclerModel(R.drawable.item_lv_09, "마리떼 프랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye", "29,000원"),
-            RecyclerModel(R.drawable.item_lv_10, "리엔느와르", "Dot Toggle Pearl Necklace (2color)", "57,000원"),
-            RecyclerModel(R.drawable.pika, "리엔느와르", "Dot Toggle Pearl Necklace (2color)", "57,000원"),
-            RecyclerModel(R.drawable.item_lv_06, "리엔느와르", "Dot Toggle Pearl Necklace (2color)", "57,000원"),
-            RecyclerModel(R.drawable.item_lv_08, "마뗑2", "ACCORDION WALLET IN WHITE", "88,000원"),
-            RecyclerModel(R.drawable.item_lv_09, "마리떼 프2랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye", "29,000원")
+            RecyclerModel(R.drawable.item_lv_01, null,"마리떼 프랑소와 저버", "CLASSIC LOGO CAP beige"),
+            RecyclerModel(R.drawable.item_lv_02, null,"마리떼 프랑소와 저버", "CLASSIC LOGO WOOL ECO BAG blue"),
+            RecyclerModel(R.drawable.item_lv_03, null,"마리떼 프랑소와 저버", "COLOR BLOCK SATIN SCRUNCHIE navy"),
+            RecyclerModel(R.drawable.item_lv_04, null,"마리떼 프랑소와 저버", "CLASSIC LOGO BACKPACK light blue"),
+            RecyclerModel(R.drawable.item_lv_05, null,"마리떼 프랑소와 저버", "CLASSIC LOGO COLOR BEANIE navy"),
+            RecyclerModel(R.drawable.background, null,"원브릴리언트", "Ivan-OB166-Black"),
+            RecyclerModel(R.drawable.item_lv_07, null,"시엔느", "Washing Lettering Ball Cap (Navy)"),
+            RecyclerModel(R.drawable.item_lv_08, null,"마뗑킴", "ACCORDION WALLET IN WHITE"),
+            RecyclerModel(R.drawable.item_lv_09, null,"마리떼 프랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye"),
+            RecyclerModel(R.drawable.item_lv_10, null,"리엔느와르", "Dot Toggle Pearl Necklace (2color)"),
+            RecyclerModel(R.drawable.pika, null,"리엔느와르", "Dot Toggle Pearl Necklace (2color)"),
+            RecyclerModel(R.drawable.item_lv_06, null,"리엔느와르", "Dot Toggle Pearl Necklace (2color)"),
+            RecyclerModel(R.drawable.item_lv_08, null,"마뗑2", "ACCORDION WALLET IN WHITE"),
+            RecyclerModel(R.drawable.item_lv_09, null,"마리떼 프2랑소와 저버", "CIRCLE LOGO SATIN HAIRBAND ivorye")
         )
 
         adapter = RecyclerAdapter(itemList)
@@ -62,7 +62,10 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         })
     }
 
-    private fun showImagePopup(image: Int) {
+    private fun showImagePopup(image: Int?) {
+        if (image == null){
+            return
+        }
         val popupView = layoutInflater.inflate(R.layout.popup_image, null)
         val popupImageView = popupView.findViewById<ImageView>(R.id.popupImageView)
         popupImageView.setImageResource(image)
@@ -81,11 +84,11 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         dialog.show(parentFragmentManager, "AddImageDialog")
     }
 
-    override fun onImageAdded(uri: Uri) {
+    override fun onImageAdded(uri: Uri, medicinename: String, takenday: String) {
         // Handle the image URI here
 
         // 예시로 새로운 항목을 추가하는 방법을 보여줍니다.
-        itemList.add(RecyclerModel(R.drawable.item_lv_09,"새 설명", "새 설명", "새 가격"))
+        itemList.add(RecyclerModel(null, uri, medicinename, takenday))
         adapter.notifyItemInserted(itemList.size - 1)
     }
 }

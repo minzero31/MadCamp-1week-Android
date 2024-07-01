@@ -17,7 +17,7 @@ class AddImageDialog : DialogFragment() {
     private var selectedImageUri: Uri? = null
 
     interface AddImageListener {
-        fun onImageAdded(uri: Uri)
+        fun onImageAdded(uri: Uri, medicinename: String, takenday: String)
     }
 
     private var listener: AddImageListener? = null
@@ -35,12 +35,15 @@ class AddImageDialog : DialogFragment() {
         _binding = DialogAddImageBinding.inflate(LayoutInflater.from(context))
         val builder = Dialog(requireContext())
         builder.setContentView(binding.root)
+
         binding.imageinsert.setOnClickListener {
             openGallery()
         }
         binding.imageaddButton.setOnClickListener {
+            val medicinename = binding.medicinename.text.toString()
+            val takenday = binding.takenday.text.toString()
             selectedImageUri?.let {
-                listener?.onImageAdded(it)
+                listener?.onImageAdded(it, medicinename, takenday)
             }
             dismiss()
         }
