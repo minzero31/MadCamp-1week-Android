@@ -24,14 +24,5 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_notifications" />
 
-    <fragment
-        android:id="@+id/newContactFragment"
-        android:name="com.example.a3tabtest.ui.home.NewContactFragment"
-        android:label="Add Contact"
-        tools:layout="@layout/fragment_add_contact" />
-
-    <action
-        android:id="@+id/action_homeFragment_to_newContactFragment"
-        app:destination="@id/newContactFragment" />
 
 </navigation>
