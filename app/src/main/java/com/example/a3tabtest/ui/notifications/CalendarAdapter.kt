@@ -38,6 +38,7 @@ class CalendarAdapter(
         val date = dates[position]
         val dayText = view.findViewById<TextView>(R.id.dayText)
         val dotView = view.findViewById<View>(R.id.dotView)
+        val ischecked = itemList.any{it.ischecked}
 
         if (date != null) {
             dayText.text = dateFormat.format(date)
@@ -48,10 +49,14 @@ class CalendarAdapter(
                 dotView.visibility = View.INVISIBLE // 비활성화된 날짜는 점을 숨김
             } else {
                 dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
-                if (date == selectedDate) {
-                    dotView.visibility = View.VISIBLE // 선택된 날짜에만 점을 보이도록 설정
+                if (date == currentDate) {
+                    if (ischecked) {
+                        dotView.visibility = View.VISIBLE // 선택된 날짜에만 점을 보이도록 설정
+                    }else{
+                        dotView.visibility = View.INVISIBLE
+                    }
                 } else {
-                    dotView.visibility = View.INVISIBLE // 선택되지 않은 날짜는 점을 숨김
+                    dotView.visibility =  View.INVISIBLE // 선택되지 않은 날짜는 점을 숨김
                 }
             }
 
