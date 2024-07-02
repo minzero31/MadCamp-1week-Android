@@ -86,11 +86,12 @@ class CalendarAdapter(
 
         val dateFormat = SimpleDateFormat("yyyy년 M월 d일 (E)", Locale.KOREAN)
         val dateString = dateFormat.format(date)
-        val name = itemList[0].title
         dialog.findViewById<TextView>(R.id.dateInfoText).text = dateString
 
+        val checkedItems = itemList.filter { it.ischecked }
+        val medicationTitles = checkedItems.joinToString(separator = "\n") { it.title }
         dialog.findViewById<TextView>(R.id.medicationText).text = "<복용한 약>"
-        dialog.findViewById<TextView>(R.id.bottomText).text = "$name"
+        dialog.findViewById<TextView>(R.id.bottomText).text = if (medicationTitles.isNotEmpty()) medicationTitles else "<복용한 약이 없습니다>"
 
         dialog.show()
     }
