@@ -8,8 +8,11 @@
     <ImageButton
         android:id="@+id/imageinsert"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:src="@android:drawable/ic_menu_gallery" />
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+
+        android:src="@drawable/add_image" />
 
     <EditText
         android:id="@+id/medicinename"
@@ -27,29 +30,33 @@
             android:id="@+id/startdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selected Date"
-            android:layout_marginTop="16dp"/>
+            android:text="복용 시작일" />
 
-        <Button
+        <ImageButton
             android:id="@+id/startpicker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="Select Date"
-            android:layout_marginStart="10dp"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:backgroundTint="#FFFFFF"
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/calendar_add" />
         <TextView
             android:id="@+id/enddate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selected Date"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="30dp"/>
+            android:text="복용 종료일"
+            android:layout_marginStart="50dp"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/endpicker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="Select Date"
-            android:layout_marginStart="10dp"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:backgroundTint="#FFFFFF"
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/calendar_add" />
     </LinearLayout>
 
 

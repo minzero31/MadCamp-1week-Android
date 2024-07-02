@@ -46,13 +46,13 @@ class AddImageDialog : DialogFragment() {
         }
         binding.startpicker.setOnClickListener{
             showDatePickerDialog { year, month, dayOfMonth ->
-                selectedstartDate = "$dayOfMonth/${month + 1}/$year"
+                selectedstartDate = "$year/${month + 1}/$dayOfMonth"
                 binding.startdate.text = selectedstartDate
             }
         }
         binding.endpicker.setOnClickListener{
             showDatePickerDialog { year, month, dayOfMonth ->
-                selectedendDate = "$dayOfMonth/${month + 1}/$year"
+                selectedendDate = "$year/${month + 1}/$dayOfMonth"
                 binding.enddate.text = selectedendDate
             }
         }
