@@ -9,4 +9,6 @@
     <string name="fab_content_description">Add new item</string>
     <string name="prev_month">Previous Month</string>
     <string name="next_month">Next Month</string>
+    <string name="action_add">Add</string>
+
 </resources>
