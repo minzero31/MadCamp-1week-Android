@@ -16,7 +16,6 @@ class AddContactDialog : DialogFragment() {
 
     private lateinit var nameEditText: EditText
     private lateinit var phoneNumberEditText: EditText
-    private lateinit var addressEditText: EditText // 주소 필드 추가
 
     private var listener: AddContactListener? = null
 
@@ -46,20 +45,18 @@ class AddContactDialog : DialogFragment() {
 
         nameEditText = view.findViewById(R.id.nameEditText)
         phoneNumberEditText = view.findViewById(R.id.phoneNumberEditText)
-        addressEditText = view.findViewById(R.id.addressEditText) // 주소 필드 초기화
 
         view.findViewById<Button>(R.id.addButton).setOnClickListener {
             val name = nameEditText.text.toString()
             val phoneNumber = phoneNumberEditText.text.toString()
-            val address = addressEditText.text.toString() // 주소 필드 값 가져오기
 
-            if (name.isNotEmpty() && phoneNumber.isNotEmpty() && address.isNotEmpty()) {
-                val newContact = Contact(name, phoneNumber, address)
+            if (name.isNotEmpty() && phoneNumber.isNotEmpty()) {
+                val newContact = Contact(name, phoneNumber)
                 Log.d("AddContactDialog", "Adding contact: $newContact")
                 listener?.onContactAdded(newContact)
                 dismiss()
             } else {
-                Log.d("AddContactDialog", "Name, phone number, or address is empty")
+                Log.d("AddContactDialog", "Name or phone number is empty")
                 // Handle empty fields if necessary
             }
         }

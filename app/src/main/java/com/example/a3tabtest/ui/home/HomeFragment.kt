@@ -29,11 +29,11 @@ class HomeFragment : Fragment(), AddContactDialog.AddContactListener {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        recyclerView = root.findViewById(R.id.recyclerview)
+        recyclerView = root.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         contactList = loadContactsFromJson().toMutableList()
-        contactAdapter = ContactAdapter(contactList, this)
+        contactAdapter = ContactAdapter(contactList)
         recyclerView.adapter = contactAdapter
 
         root.findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
@@ -46,6 +46,7 @@ class HomeFragment : Fragment(), AddContactDialog.AddContactListener {
     private fun loadContactsFromJson(): List<Contact> {
         val file = File(requireContext().filesDir, "contacts.json")
         if (!file.exists()) {
+            // 만약 파일이 존재하지 않으면, raw 리소스에서 복사합니다.
             resources.openRawResource(R.raw.contacts).use { inputStream ->
                 file.outputStream().use { outputStream ->
                     inputStream.copyTo(outputStream)
@@ -68,7 +69,6 @@ class HomeFragment : Fragment(), AddContactDialog.AddContactListener {
         contactAdapter.notifyItemInserted(contactList.size - 1)
         saveContactsToJson()
     }
-
 
     private fun saveContactsToJson() {
         try {
