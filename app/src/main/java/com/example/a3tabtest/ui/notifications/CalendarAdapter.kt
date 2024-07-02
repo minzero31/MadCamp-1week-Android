@@ -49,14 +49,15 @@ class CalendarAdapter(
                 dotView.visibility = View.INVISIBLE // 비활성화된 날짜는 점을 숨김
             } else {
                 dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                if (date > currentDate){
+                    dotView.visibility =  View.INVISIBLE
+                }
                 if (date == currentDate) {
                     if (ischecked) {
                         dotView.visibility = View.VISIBLE // 선택된 날짜에만 점을 보이도록 설정
                     }else{
                         dotView.visibility = View.INVISIBLE
                     }
-                } else {
-                    dotView.visibility =  View.INVISIBLE // 선택되지 않은 날짜는 점을 숨김
                 }
             }
 
@@ -66,7 +67,7 @@ class CalendarAdapter(
             view.setOnClickListener {
                 selectedDate = date
                 notifyDataSetChanged() // 데이터 변경을 알림
-                showDateDialog(date, itemList)
+                showDateDialog(date, itemList, currentDate)
             }
         } else {
             dayText.text = ""
@@ -77,7 +78,7 @@ class CalendarAdapter(
         return view
     }
 
-    private fun showDateDialog(date: Date, itemList: MutableList<RecyclerModel>) {
+    private fun showDateDialog(date: Date, itemList: MutableList<RecyclerModel>, currentDate: Date) {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dialog_date_info)
 
@@ -91,8 +92,12 @@ class CalendarAdapter(
         val checkedItems = itemList.filter { it.ischecked }
         val medicationTitles = checkedItems.joinToString(separator = "\n") { it.title }
         dialog.findViewById<TextView>(R.id.medicationText).text = "<복용한 약>"
-        dialog.findViewById<TextView>(R.id.bottomText).text = if (medicationTitles.isNotEmpty()) medicationTitles else "<복용한 약이 없습니다>"
+        if(currentDate < date){
+            dialog.findViewById<TextView>(R.id.bottomText).text = "<복용한 약이 없습니다>"
+        }else{
+            dialog.findViewById<TextView>(R.id.bottomText).text = if (medicationTitles.isNotEmpty()) medicationTitles else "<복용한 약이 없습니다>"
 
+        }
         dialog.show()
     }
 }
