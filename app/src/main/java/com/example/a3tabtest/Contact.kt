@@ -7,5 +7,5 @@ import kotlinx.serialization.SerialName
 data class Contact(
     @SerialName("name") val name: String,
     @SerialName("phoneNumber") val phoneNumber: String,
-    @SerialName("address") val address: String // 주소 필드 추가
+    @SerialName("address") val address: String = ""// 주소 필드 추가
 )
