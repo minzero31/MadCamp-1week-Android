@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_dashboard_settings"
-        android:icon="@drawable/pika"
+        android:icon="@drawable/plus_icon_revert"
         android:title="@string/action_dashboard_settings"
         app:showAsAction="ifRoom" />
 </menu>
