@@ -3,8 +3,12 @@ package com.example.a3tabtest.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +27,11 @@ class HomeFragment : Fragment(), AddContactDialog.AddContactListener {
     private lateinit var contactAdapter: ContactAdapter
     private lateinit var contactList: MutableList<Contact>
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)  // 메뉴가 있음을 알립니다.
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,13 +45,24 @@ class HomeFragment : Fragment(), AddContactDialog.AddContactListener {
         contactAdapter = ContactAdapter(contactList, this)
         recyclerView.adapter = contactAdapter
 
-        root.findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
-            showAddContactDialog()
-        }
+
 
         return root
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_home_settings -> {
+                showAddContactDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     private fun loadContactsFromJson(): List<Contact> {
         val file = File(requireContext().filesDir, "contacts.json")
         if (!file.exists()) {
