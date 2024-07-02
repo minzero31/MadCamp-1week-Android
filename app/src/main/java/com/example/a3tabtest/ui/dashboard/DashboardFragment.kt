@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -22,6 +25,11 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
     private lateinit var itemList: MutableList<RecyclerModel>
     private lateinit var adapter: RecyclerAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,9 +37,6 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         binding = ActivityRecyclerViewBinding.inflate(inflater, container, false)
 
         initRecycler()
-        binding.buttonUpload.setOnClickListener {
-            showAddImageDialog()
-        }
         loadSavedData()
         return binding.root
     }
@@ -51,6 +56,21 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
             }
         })
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.dashboard_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_dashboard_settings -> {
+                showAddImageDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun showImagePopup(imageUri: Uri?) {

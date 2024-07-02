@@ -10,5 +10,6 @@
     <string name="prev_month">Previous Month</string>
     <string name="next_month">Next Month</string>
     <string name="action_add">Add</string>
-
+    <string name="action_home_settings">Add</string>
+    <string name="action_dashboard_settings">Add</string>
 </resources>
