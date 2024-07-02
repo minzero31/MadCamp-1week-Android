@@ -1,26 +1,25 @@
-// ContactAdapter.kt
 package com.example.a3tabtest
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a3tabtest.ui.home.ViewContactDialog
 
-
-class ContactAdapter(private val contactList: List<Contact>) :
+class ContactAdapter(private val contactList: List<Contact>, private val fragment: androidx.fragment.app.Fragment) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val phoneNumberTextView: TextView = itemView.findViewById(R.id.phoneNumberTextView)
 
-        fun bind(contact: Contact) {
+        fun bind(contact: Contact, fragment: androidx.fragment.app.Fragment) {
             nameTextView.text = contact.name
             phoneNumberTextView.text = contact.phoneNumber
             itemView.setOnClickListener {
-                Toast.makeText(itemView.context, "'${contact.name}'를 클릭했습니다.", Toast.LENGTH_LONG).show()
+                val dialog = ViewContactDialog.newInstance(contact.name, contact.phoneNumber, contact.address)
+                dialog.show(fragment.childFragmentManager, "ViewContactDialog")
             }
         }
     }
@@ -33,7 +32,7 @@ class ContactAdapter(private val contactList: List<Contact>) :
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val currentContact = contactList[position]
-        holder.bind(currentContact)
+        holder.bind(currentContact, fragment)
     }
 
     override fun getItemCount() = contactList.size

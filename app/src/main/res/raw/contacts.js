@@ -1,15 +1,15 @@
 [
-    {"name": "연우", "phoneNumber": "123-456-7890"},
-    {"name": "연진", "phoneNumber": "987-654-3210"},
-    {"name": "수연", "phoneNumber": "555-666-7777"},
-    {"name": "찬란", "phoneNumber": "555-666-7777"},
-    {"name": "현서", "phoneNumber": "555-666-7777"},
-    {"name": "민경", "phoneNumber": "555-666-7777"},
-    {"name": "유나", "phoneNumber": "555-666-7777"},
-    {"name": "윤영", "phoneNumber": "555-666-7777"},
-    {"name": "주현", "phoneNumber": "555-666-7777"},
-    {"name": "도연", "phoneNumber": "555-666-7777"},
-    {"name": "제인", "phoneNumber": "555-666-7777"},
-    {"name": "채윤", "phoneNumber": "555-666-7777"}
+    {"name": "정형외과", "phoneNumber": "123-456-7890", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "소아과", "phoneNumber": "987-654-3210", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "이비인후과", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "대학병원", "phoneNumber": "555-666-7777","address": "경기도 뭐시기 뭐시기"},
+    {"name": "내과", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 1", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 2", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 3", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 4", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 5", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 6", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
+    {"name": "병원 7", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"}
 
 ]
