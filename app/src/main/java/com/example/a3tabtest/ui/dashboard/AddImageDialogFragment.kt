@@ -19,7 +19,7 @@ class AddImageDialog : DialogFragment() {
     private var selectedImageUri: Uri? = null
 
     interface AddImageListener {
-        fun onImageAdded(uri: Uri, medicinename: String, takenday: String)
+        fun onImageAdded(uri: Uri, medicinename: String, takenday: String, isChecked: Boolean)
     }
 
     private var listener: AddImageListener? = null
@@ -61,7 +61,7 @@ class AddImageDialog : DialogFragment() {
             val medicinename = binding.medicinename.text.toString()
             val takenday = "$selectedstartDate ~ $selectedendDate"
             selectedImageUri?.let {
-                listener?.onImageAdded(it, medicinename, takenday)
+                listener?.onImageAdded(it, medicinename, takenday, false)
             }
             dismiss()
         }

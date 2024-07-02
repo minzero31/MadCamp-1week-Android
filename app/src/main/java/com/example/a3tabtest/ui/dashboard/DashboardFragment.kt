@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
@@ -49,6 +50,7 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
                 showImagePopup(itemList[position].imageUri)
             }
         })
+
     }
 
     private fun showImagePopup(imageUri: Uri?) {
@@ -75,11 +77,11 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         dialog.show(parentFragmentManager, "AddImageDialog")
     }
 
-    override fun onImageAdded(uri: Uri, medicinename: String, takenday: String) {
+    override fun onImageAdded(uri: Uri, medicinename: String, takenday: String, isChecked: Boolean) {
         // Handle the image URI here
 
         // 예시로 새로운 항목을 추가하는 방법을 보여줍니다.
-        itemList.add(RecyclerModel(null, uri, medicinename, takenday))
+        itemList.add(RecyclerModel(null, uri, medicinename, takenday, false))
         adapter.notifyItemInserted(itemList.size - 1)
 
         // SharedPreferences 객체 가져오기
@@ -93,6 +95,7 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         editor.putString("uri_$itemIndex", uri.toString())
         editor.putString("medicinename_$itemIndex", medicinename)
         editor.putString("takenday_$itemIndex", takenday)
+        editor.putBoolean("isChecked_$itemIndex", isChecked)
         editor.apply()
     }
 
@@ -101,13 +104,14 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
 
         itemList.clear()
 
-        for (i in 0 until sharedPref.all.size / 3) { // 각 항목당 3개의 데이터 (uri, medicinename, takenday)
+        for (i in 0 until sharedPref.all.size / 4) { // 각 항목당 3개의 데이터 (uri, medicinename, takenday)
             val uri = sharedPref.getString("uri_$i", null)?.let { Uri.parse(it) }
             val medicinename = sharedPref.getString("medicinename_$i", "")
             val takenday = sharedPref.getString("takenday_$i", "")
+            val isChecked = sharedPref.getBoolean("isChecked_$i", false)
 
             if (uri != null && medicinename != null && takenday != null) {
-                itemList.add(RecyclerModel(null, uri, medicinename, takenday))
+                itemList.add(RecyclerModel(null, uri, medicinename, takenday, isChecked))
             }
         }
 

@@ -9,13 +9,15 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.a3tabtest.R
+import com.example.a3tabtest.ui.dashboard.RecyclerModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarAdapter(
     private val context: Context,
     private val dates: List<Date?>, // Date 배열에 null을 허용하여 비어 있는 셀을 나타냄
-    private val currentDate: Date
+    private val currentDate: Date,
+    private var itemList: MutableList<RecyclerModel>
 ) : BaseAdapter() {
 
     private val dateFormat = SimpleDateFormat("d", Locale.KOREAN)
@@ -36,6 +38,7 @@ class CalendarAdapter(
         val date = dates[position]
         val dayText = view.findViewById<TextView>(R.id.dayText)
         val dotView = view.findViewById<View>(R.id.dotView)
+        val ischecked = itemList.any{it.ischecked}
 
         if (date != null) {
             dayText.text = dateFormat.format(date)
@@ -46,10 +49,15 @@ class CalendarAdapter(
                 dotView.visibility = View.INVISIBLE // 비활성화된 날짜는 점을 숨김
             } else {
                 dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
-                if (date == selectedDate) {
-                    dotView.visibility = View.VISIBLE // 선택된 날짜에만 점을 보이도록 설정
-                } else {
-                    dotView.visibility = View.INVISIBLE // 선택되지 않은 날짜는 점을 숨김
+                if (date > currentDate){
+                    dotView.visibility =  View.INVISIBLE
+                }
+                if (date == currentDate) {
+                    if (ischecked) {
+                        dotView.visibility = View.VISIBLE // 선택된 날짜에만 점을 보이도록 설정
+                    }else{
+                        dotView.visibility = View.INVISIBLE
+                    }
                 }
             }
 
@@ -59,7 +67,7 @@ class CalendarAdapter(
             view.setOnClickListener {
                 selectedDate = date
                 notifyDataSetChanged() // 데이터 변경을 알림
-                showDateDialog(date)
+                showDateDialog(date, itemList, currentDate)
             }
         } else {
             dayText.text = ""
@@ -70,7 +78,7 @@ class CalendarAdapter(
         return view
     }
 
-    private fun showDateDialog(date: Date) {
+    private fun showDateDialog(date: Date, itemList: MutableList<RecyclerModel>, currentDate: Date) {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dialog_date_info)
 
@@ -81,9 +89,15 @@ class CalendarAdapter(
         val dateString = dateFormat.format(date)
         dialog.findViewById<TextView>(R.id.dateInfoText).text = dateString
 
+        val checkedItems = itemList.filter { it.ischecked }
+        val medicationTitles = checkedItems.joinToString(separator = "\n") { it.title }
         dialog.findViewById<TextView>(R.id.medicationText).text = "<복용한 약>"
-        dialog.findViewById<TextView>(R.id.bottomText).text = "우하하"
+        if(currentDate < date){
+            dialog.findViewById<TextView>(R.id.bottomText).text = "<복용한 약이 없습니다>"
+        }else{
+            dialog.findViewById<TextView>(R.id.bottomText).text = if (medicationTitles.isNotEmpty()) medicationTitles else "<복용한 약이 없습니다>"
 
+        }
         dialog.show()
     }
 }

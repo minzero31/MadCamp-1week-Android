@@ -1,9 +1,11 @@
 package com.example.a3tabtest.ui.dashboard
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +25,7 @@ class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
         this.itemClickListener = itemClickListener
     }
 
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -36,6 +39,13 @@ class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             itemClickListener.onItemClick(position)
+        }
+        holder.itemView.findViewById<CheckBox>(R.id.check1).setOnCheckedChangeListener { _, isChecked ->
+            items[position].ischecked = isChecked
+            val sharedPref = holder.itemView.context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putBoolean("isChecked_$position", isChecked)
+            editor.apply()
         }
         holder.bindItems(items[position])
     }
@@ -51,7 +61,7 @@ class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
             val imageArea = itemView.findViewById<ImageView>(R.id.imageArea)
             val titleArea = itemView.findViewById<TextView>(R.id.titleArea)
             val contentArea = itemView.findViewById<TextView>(R.id.contentArea)
-
+            val checkArea = itemView.findViewById<CheckBox>(R.id.check1)
 
             when {
                 items.imageUri != null -> {
@@ -70,6 +80,7 @@ class RecyclerAdapter(val items: MutableList<RecyclerModel>) :
             }
             titleArea.text = items.title
             contentArea.text = items.content
+            checkArea.isChecked = items.ischecked
         }
 
     }
