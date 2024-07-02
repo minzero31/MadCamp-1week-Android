@@ -95,6 +95,7 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
         editor.putString("uri_$itemIndex", uri.toString())
         editor.putString("medicinename_$itemIndex", medicinename)
         editor.putString("takenday_$itemIndex", takenday)
+        editor.putBoolean("isChecked_$itemIndex", isChecked)
         editor.apply()
     }
 
@@ -103,7 +104,7 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
 
         itemList.clear()
 
-        for (i in 0 until sharedPref.all.size / 3) { // 각 항목당 3개의 데이터 (uri, medicinename, takenday)
+        for (i in 0 until sharedPref.all.size / 4) { // 각 항목당 3개의 데이터 (uri, medicinename, takenday)
             val uri = sharedPref.getString("uri_$i", null)?.let { Uri.parse(it) }
             val medicinename = sharedPref.getString("medicinename_$i", "")
             val takenday = sharedPref.getString("takenday_$i", "")

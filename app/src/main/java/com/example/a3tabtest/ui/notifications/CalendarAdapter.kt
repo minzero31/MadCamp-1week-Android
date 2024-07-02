@@ -9,13 +9,15 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.a3tabtest.R
+import com.example.a3tabtest.ui.dashboard.RecyclerModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarAdapter(
     private val context: Context,
     private val dates: List<Date?>, // Date 배열에 null을 허용하여 비어 있는 셀을 나타냄
-    private val currentDate: Date
+    private val currentDate: Date,
+    private var itemList: MutableList<RecyclerModel>
 ) : BaseAdapter() {
 
     private val dateFormat = SimpleDateFormat("d", Locale.KOREAN)
@@ -59,7 +61,7 @@ class CalendarAdapter(
             view.setOnClickListener {
                 selectedDate = date
                 notifyDataSetChanged() // 데이터 변경을 알림
-                showDateDialog(date)
+                showDateDialog(date, itemList)
             }
         } else {
             dayText.text = ""
@@ -70,7 +72,7 @@ class CalendarAdapter(
         return view
     }
 
-    private fun showDateDialog(date: Date) {
+    private fun showDateDialog(date: Date, itemList: MutableList<RecyclerModel>) {
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.dialog_date_info)
 
@@ -79,10 +81,11 @@ class CalendarAdapter(
 
         val dateFormat = SimpleDateFormat("yyyy년 M월 d일 (E)", Locale.KOREAN)
         val dateString = dateFormat.format(date)
+        val name = itemList[0].title
         dialog.findViewById<TextView>(R.id.dateInfoText).text = dateString
 
         dialog.findViewById<TextView>(R.id.medicationText).text = "<복용한 약>"
-        dialog.findViewById<TextView>(R.id.bottomText).text = "우하하"
+        dialog.findViewById<TextView>(R.id.bottomText).text = "$name"
 
         dialog.show()
     }
