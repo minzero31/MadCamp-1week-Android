@@ -63,7 +63,7 @@ class DashboardFragment : Fragment(), AddImageDialog.AddImageListener {
             .load(imageUri)
             .into(popupImageView)
 
-        val popupWindow = PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val popupWindow = PopupWindow(popupView, 900, 900)
         popupWindow.isOutsideTouchable = true
         popupWindow.isFocusable = true
 
