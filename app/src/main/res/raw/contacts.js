@@ -8,8 +8,6 @@
     {"name": "병원 2", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
     {"name": "병원 3", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
     {"name": "병원 4", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
-    {"name": "병원 5", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
-    {"name": "병원 6", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"},
-    {"name": "병원 7", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"}
+    {"name": "병원 5", "phoneNumber": "555-666-7777", "address": "경기도 뭐시기 뭐시기"}
 
 ]
