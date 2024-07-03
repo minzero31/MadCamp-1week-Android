@@ -63,6 +63,7 @@ class NotificationsFragment : Fragment() {
         currentMonthYear.text = dateFormat.format(calendar.time)
         val days = ArrayList<Date?>()
         val monthCalendar = calendar.clone() as Calendar
+        val cal = Calendar.getInstance().time
         monthCalendar.set(Calendar.DAY_OF_MONTH, 1)
         val firstDayOfMonth = monthCalendar.get(Calendar.DAY_OF_WEEK) - 1
         monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
@@ -76,7 +77,7 @@ class NotificationsFragment : Fragment() {
             monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
-        val adapter = CalendarAdapter(requireContext(), days, calendar.time, itemList)
+        val adapter = CalendarAdapter(requireContext(), days, calendar.time, itemList, cal)
         calendarGridView.adapter = adapter
     }
     fun loadSavedData() {
