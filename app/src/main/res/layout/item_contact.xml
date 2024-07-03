@@ -39,6 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
+                    android:layout_marginRight="5dp"
                     android:layout_toRightOf="@+id/imageIcon"
                     android:orientation="vertical">
 
@@ -48,6 +49,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        android:layout_marginTop="6dp"
                         android:contentDescription="Name of the contact" />
 
                     <TextView
@@ -55,6 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
+                        android:layout_marginTop="5dp"
                         android:contentDescription="Phone number of the contact"/>
 
                     <TextView

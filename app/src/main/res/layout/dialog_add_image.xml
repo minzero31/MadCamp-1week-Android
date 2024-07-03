@@ -41,12 +41,19 @@
             android:padding="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/calendar_add" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="25dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/wave" />
         <TextView
             android:id="@+id/enddate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="복용 종료일"
-            android:layout_marginStart="50dp"/>
+            android:layout_marginStart="25dp"/>
 
         <ImageButton
             android:id="@+id/endpicker"
