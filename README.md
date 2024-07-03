@@ -1,9 +1,8 @@
-# 거북이
+# 거북이: 다양한 병원 및 약국 정보를 제공하고, 꾸준한 건강관리를 도와주는 헬스케어 어플 
 ![image](https://github.com/minzero31/MadCamp-1week-Android/assets/154976598/ecf5d82d-1963-4542-addb-1fd11a6130bf)
-![image](https://github.com/minzero31/MadCamp-1week-Android/assets/154976598/3e4a014e-5910-4c86-a78f-017b2f4a4f5e)
 ![image](https://github.com/minzero31/MadCamp-1week-Android/assets/154976598/851538f3-3990-40ef-8710-578d527ed85e)
 ![image](https://github.com/minzero31/MadCamp-1week-Android/assets/154976598/003098c8-414b-4ba9-80b5-a9ff246395fb)
-
+![image](https://github.com/minzero31/MadCamp-1week-Android/assets/154976598/3e4a014e-5910-4c86-a78f-017b2f4a4f5e)
 ## 👨‍🏫 프로젝트 소개
 ‘장수’의 상징인 동물 거북이 ! 
 ‘느림’의 상징인 동물 거북이 ! 
@@ -12,12 +11,12 @@
 
 ## ⏲️ 개발 기간 
 - 2024.06.27(목) ~ 2024.07.3(토)
-- 
+
   
 ## 🧑‍🤝‍🧑 개발자 소개 
 - **김민영** : 숙명여자대학교 인공지능공학부 23학번
 - **하도현** : 한국과학기술원 전산학부 22학
-- 
+
 
 ## 💻 개발환경
 - **Version** : Java 17
