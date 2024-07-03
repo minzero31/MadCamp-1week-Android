@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.a3tabtest.R
 import com.example.a3tabtest.ui.dashboard.RecyclerModel
 import java.text.SimpleDateFormat
@@ -55,7 +56,10 @@ class NotificationsFragment : Fragment() {
             calendar.add(Calendar.MONTH, 1)
             updateCalendar()
         }
-
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.seaweed)
+            .into(root.findViewById(R.id.weed))
         return root
     }
 
