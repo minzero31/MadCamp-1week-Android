@@ -1,10 +1,12 @@
 // MainActivity.kt
 package com.example.a3tabtest
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -41,7 +43,10 @@ class MainActivity : AppCompatActivity() {
                 .asGif()
                 .load(R.drawable.move_turtle) // 실제 GIF 파일로 대체하세요
                 .into(imageView)
-
+            val titleTextView: TextView = customView.findViewById(R.id.actionbar_title)
+            // 커스텀 폰트를 적용
+            val typeface: Typeface = resources.getFont(R.font.pop)
+            titleTextView.typeface = typeface
             actionBar.setDisplayShowCustomEnabled(true)
             actionBar.customView = customView
         }
