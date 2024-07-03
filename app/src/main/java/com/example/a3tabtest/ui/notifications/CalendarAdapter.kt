@@ -17,12 +17,14 @@ class CalendarAdapter(
     private val context: Context,
     private val dates: List<Date?>, // Date 배열에 null을 허용하여 비어 있는 셀을 나타냄
     private val currentDate: Date,
-    private var itemList: MutableList<RecyclerModel>
+    private var itemList: MutableList<RecyclerModel>,
+    private val cal: Date
 ) : BaseAdapter() {
 
     private val dateFormat = SimpleDateFormat("d", Locale.KOREAN)
     private val monthFormat = SimpleDateFormat("M", Locale.KOREAN)
     private val currentMonth = monthFormat.format(currentDate)
+    private val currentMonth_real = monthFormat.format(cal)
     private var selectedDate: Date? = null
 
     override fun getCount(): Int = dates.size
@@ -47,7 +49,10 @@ class CalendarAdapter(
             if (dateMonth != currentMonth) {
                 dayText.setTextColor(ContextCompat.getColor(context, R.color.greyed_out))
                 dotView.visibility = View.INVISIBLE // 비활성화된 날짜는 점을 숨김
-            } else {
+            } else if(dateMonth != currentMonth_real){
+                dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+                dotView.visibility = View.INVISIBLE
+            }else {
                 dayText.setTextColor(ContextCompat.getColor(context, android.R.color.black))
                 if (date > currentDate){
                     dotView.visibility =  View.INVISIBLE
